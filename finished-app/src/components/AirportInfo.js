@@ -13,15 +13,18 @@ function AirportInfo() {
             const reqOptions = {
                 method: 'GET',
                 headers: {
-                    "x-rapidapi-key": `${process.env.REACT_APP_API_KEY}`,
+                    "x-rapidapi-key": `${process.env.REACT_APP_API_KEY}`, //need to remove <> and add "" around the key in env
                     "x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
                     "useQueryString": true
                 }
             }
+            // console.log(process.env.REACT_APP_API_KEY)
+            // console.log(`${process.env.REACT_APP_API_KEY}`)
             let response = await fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/US/USD/en-US/?" + new URLSearchParams({query: query}), reqOptions)
             response = await response.json()
-            console.log(response.Places)
+            // console.log(response) //{Places: Array(10)}
             setPlaces(response.Places)
+            console.log(response.Places) //Warning: Each child in a list should have a unique "key" prop.
         }
         fetchMyAPI()
         setShowPlaces(true)
